@@ -1,5 +1,5 @@
 export interface Content {
-    image: string;
+    image?: string | null;
     title: string;
     description?: string | null;
     link: string;

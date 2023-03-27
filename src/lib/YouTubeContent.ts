@@ -30,7 +30,7 @@ const GetYouTubeContent: ContentProvider = async (): Promise<Content[]> => {
             continue;
         }
 
-        let thumbnailUrl = "";
+        let thumbnailUrl: string | null = null;
 
         if (!snippet.thumbnails) {
             continue;
