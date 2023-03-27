@@ -1,13 +1,10 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import ContentCard from "@mmccalldev/components/ContentCard";
 import {GetStaticProps} from "next";
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
 import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import {Content} from "@mmccalldev/lib/Content";
-import Script from "next/script";
-
-const inter = Inter({ subsets: ['latin'] })
+import {useEffect} from "react";
 
 interface IndexProps {
     content: Content[]
@@ -25,6 +22,15 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 }
 
 export default function Home({content}: IndexProps) {
+
+    useEffect(() => {
+        if (typeof document !== 'undefined') {
+            require('jquery/dist/jquery.min.js')
+            require('bootstrap/dist/js/bootstrap.bundle.min.js')
+            require('masonry-layout/dist/masonry.pkgd.min.js')
+        }
+    })
+
     return (
         <>
             <Head>
@@ -32,7 +38,6 @@ export default function Home({content}: IndexProps) {
                 <meta name="description" content="Matthew McCall's personal website, blog, and portfolio." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
-                <Script src={"masonry-layout.js"} strategy="beforeInteractive" />
             </Head>
             <main>
                 <div className={"container"}>
