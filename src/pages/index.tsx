@@ -42,7 +42,7 @@ export default function Home({content}: IndexProps) {
             <main>
                 <div className={"container"}>
                     <h1>Matthew McCall</h1>
-                    <div className={"row row-cols-md-3"} data-masonry='{"percentPosition": true }'>
+                    <div className={"row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"} data-masonry='{"percentPosition": true }'>
                     {
                         content.map((content, index) => {
                             return (
