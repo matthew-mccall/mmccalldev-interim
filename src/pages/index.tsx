@@ -5,6 +5,9 @@ import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
 import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import {Content} from "@mmccalldev/lib/Content";
 import {useEffect} from "react";
+import VerticalCenter from "@mmccalldev/components/VerticalCenter";
+import NavigationBar from "@mmccalldev/components/NavigationBar";
+import {Fade} from "react-awesome-reveal";
 
 interface IndexProps {
     content: Content[]
@@ -40,18 +43,37 @@ export default function Home({content}: IndexProps) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main>
-                <div className={"container"}>
-                    <h1>Matthew McCall</h1>
-                    <div className={"row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"} data-masonry='{"percentPosition": true }'>
-                    {
-                        content.map((content, index) => {
-                            return (
-                                <div className={"col mb-3"} key={index}>
-                                    <ContentCard {...content}/>
-                                </div>
-                            )
-                        })
-                    }
+                <NavigationBar />
+                <div style={{
+                    backgroundImage: "linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.2)), url(https://bing.biturl.top/?format=image&index=0&mkt=en-US)",
+                    backgroundPosition: "fixed",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundAttachment: "fixed"
+                }}>
+                    <div className={"vh-100"}>
+                        <VerticalCenter>
+                            <div className={"container text-light"}>
+                                <h1 className={"display-1"}>Matthew McCall</h1>
+                            </div>
+                        </VerticalCenter>
+                    </div>
+                    <div className={"py-5"}>
+                        <div className={"container"}>
+                            <div className={"row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4"} data-masonry='{"percentPosition": true }'>
+                                <Fade cascade damping={0.2}>
+                                {
+                                    content.map((content, index) => {
+                                        return (
+                                            <div className={"col mb-3"} key={index}>
+                                                <ContentCard {...content}/>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                </Fade>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
