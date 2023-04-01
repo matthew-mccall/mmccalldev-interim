@@ -3,6 +3,7 @@ import ContentCard from "@mmccalldev/components/ContentCard";
 import {GetStaticProps} from "next";
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
 import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
+import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
 import {Content} from "@mmccalldev/lib/Content";
 import {useEffect} from "react";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
@@ -16,8 +17,11 @@ interface IndexProps {
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     const youtubeContent = await GetYouTubeContent();
     const twitterContent = await GetTwitterContent();
+    const githubContent = await GetGitHubContent();
 
-    const content = [...youtubeContent, ...twitterContent]
+    const content = [...youtubeContent, ...twitterContent, ...githubContent].sort((a, b) => {
+        return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
+    })
 
     return {
         props: { content }
@@ -61,16 +65,16 @@ export default function Home({content}: IndexProps) {
                     <div className={"py-5"}>
                         <div className={"container"}>
                             <div className={"row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4"} data-masonry='{"percentPosition": true }'>
-                                <Fade cascade damping={0.2}>
-                                {
-                                    content.map((content, index) => {
-                                        return (
-                                            <div className={"col mb-3"} key={index}>
-                                                <ContentCard {...content}/>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                <Fade cascade damping={0.2} triggerOnce>
+                                    {
+                                        content.map((content, index) => {
+                                            return (
+                                                <div className={"col mb-3"} key={index}>
+                                                    <ContentCard {...content}/>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </Fade>
                             </div>
                         </div>
