@@ -4,6 +4,7 @@ import {GetStaticProps} from "next";
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
 import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
+import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 import {Content} from "@mmccalldev/lib/Content";
 import {useEffect} from "react";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
@@ -18,8 +19,9 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     const youtubeContent = await GetYouTubeContent();
     const twitterContent = await GetTwitterContent();
     const githubContent = await GetGitHubContent();
+    const unsplashContent = await GetUnsplashContent();
 
-    const content = [...youtubeContent, ...twitterContent, ...githubContent].sort((a, b) => {
+    const content = [...youtubeContent, ...twitterContent, ...githubContent, ...unsplashContent].sort((a, b) => {
         return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
     })
 
