@@ -6,10 +6,11 @@ import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
 import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 import {Content} from "@mmccalldev/lib/Content";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
 import {Fade} from "react-awesome-reveal";
+import DynamicBackground from "@mmccalldev/components/DynamicBackground";
 
 interface IndexProps {
     content: Content[]
@@ -50,13 +51,7 @@ export default function Home({content}: IndexProps) {
             </Head>
             <main>
                 <NavigationBar />
-                <div style={{
-                    backgroundImage: "linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.2)), url(https://bing.biturl.top/?format=image&index=0&mkt=en-US)",
-                    backgroundPosition: "fixed",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    backgroundAttachment: "fixed"
-                }}>
+                <DynamicBackground>
                     <div className={"vh-100"}>
                         <VerticalCenter>
                             <div className={"container text-light"}>
@@ -81,7 +76,7 @@ export default function Home({content}: IndexProps) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </DynamicBackground>
             </main>
         </>
     )

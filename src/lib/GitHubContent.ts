@@ -9,7 +9,6 @@ interface GitHubPushEvent {
     repos: {
         name: string
         commitCount: number
-        link: string
     }[]
 }
 
@@ -24,72 +23,49 @@ const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
 
     let content: Content[] = [];
 
-    let initialPushEventsMap = new Map<string, GitHubPushEvent>;
-
     let pushEvents = res.data.filter((event) => event.type === 'PushEvent');
+
+    let initialPushEventsMap = new Map<string, Map<string, number>>;
     let pushEventsGroupedByDay = pushEvents.reduce((acc, event) => {
         const date = new Date(event.created_at!);
-        const key = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        const key = date.toLocaleDateString()
+        const repoGroup = acc.get(key);
 
-
-        if (!acc.get(key)) {
-            acc.set(key, {
-                repos: [{
-                    name: event.repo.name,
-                    commitCount: event.payload.commits.length,
-                    link: event.payload.commits[0].url,
-                }],
-            })
-
+        if (!repoGroup) {
+            // @ts-ignore
+            acc.set(key, new Map([[event.repo.name, event.payload.commits.length]]));
             return acc;
         }
 
-        const repoGroup = acc.get(key)!;
-        let index = repoGroup.repos.findIndex(repo => repo.name === event.repo.name);
+        const commitCount = repoGroup.get(event.repo.name);
 
-        if (index === -1) {
-           repoGroup.repos.push({
-                name: event.repo.name,
-                commitCount: event.payload.commits.length,
-                link: event.payload.commits[0].url,
-            });
-
+        if (!commitCount) {
+            // @ts-ignore
+            repoGroup.set(event.repo.name, event.payload.commits.length);
             return acc;
         }
 
-        repoGroup.repos[index].commitCount += event.payload.commits.length;
+        // @ts-ignore
+        repoGroup.set(event.repo.name, commitCount + event.payload.commits.length);
 
         return acc;
     }, initialPushEventsMap);
 
-    for (const [key, value] of pushEventsGroupedByDay.entries()) {
-        for (const repo of value.repos) {
+    pushEventsGroupedByDay.forEach((repoGroup, date) => {
+        repoGroup.forEach((commitCount, repoName) => {
+
+            const userNameLocation = repoName.indexOf('matthew-mccall/');
+            const shortenedRepoName = userNameLocation === 0 ? repoName.slice(15) : repoName;
+
+            // replace hyphens with non-breaking hyphens
+            const formattedRepoName = shortenedRepoName.replace(/-/g, '\u2011');
+
             content.push({
-                title: repo.name,
-                description: `Pushed ${repo.commitCount} commits.`,
-                link: repo.link,
-                date: (new Date(key)).toISOString(),
+                title: `${commitCount} commits to ${formattedRepoName}`,
+                date: date,
             });
-        }
-    }
-
-    for (const event of res.data) {
-
-        if (!event.created_at || !event.type || !event.repo) {
-            continue;
-        }
-
-        switch (event.type) {
-            case 'PullRequestEvent':
-                content.push({
-                    title: `Opened a pull request to ${event.repo.name}`,
-                    description: `Opened a pull request to ${event.repo.name}`,
-                    link: event.payload.pull_request.html_url,
-                    date: event.created_at,
-                });
-                break;
-        }
-    }
+        });
+    });
 
     return content;
 }

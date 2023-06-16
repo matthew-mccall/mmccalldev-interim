@@ -2,7 +2,7 @@ export interface Content {
     image?: string | null;
     title: string;
     description?: string | null;
-    link: string;
+    link?: string;
     date: string;
 }
 
