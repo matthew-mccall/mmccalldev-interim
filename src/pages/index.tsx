@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import ContentCard from "@mmccalldev/components/ContentCard";
 import {GetStaticProps} from "next";
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
@@ -43,12 +42,6 @@ export default function Home({content}: IndexProps) {
 
     return (
         <>
-            <Head>
-                <title>Matthew McCall</title>
-                <meta name="description" content="Matthew McCall's personal website, blog, and portfolio." />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
             <main>
                 <NavigationBar />
                 <DynamicBackground>
@@ -56,6 +49,15 @@ export default function Home({content}: IndexProps) {
                         <VerticalCenter>
                             <div className={"container text-light"}>
                                 <h1 className={"display-1"}>Matthew McCall</h1>
+                                <p className={"lead"}>Computer Science Major at Rensselaer Polytechnic Institute</p>
+                                <div className={"row g-1"}>
+                                    <div className={"col-auto"}>
+                                    <span className="badge rounded-pill text-bg-light bg-opacity-75">C++</span>
+                                    </div>
+                                    <div className={"col-auto"}>
+                                    <span className="badge rounded-pill text-bg-light bg-opacity-75">Java</span>
+                                    </div>
+                                </div>
                             </div>
                         </VerticalCenter>
                     </div>

@@ -56,13 +56,13 @@ export default function NavigationBar() {
                                 <a className={"nav-link"} href={"/"}>home</a>
                             </li>
                             <li className={"nav-item"}>
-                                <a className={"nav-link"} href={"/blog"}>blog</a>
+                                <a className={"nav-link disabled"} href={"/blog"}>blog</a>
                             </li>
                             <li className={"nav-item"}>
-                                <a className={"nav-link"} href={"/gallery"}>gallery</a>
+                                <a className={"nav-link disabled"} href={"/gallery"}>gallery</a>
                             </li>
                             <li className={"nav-item"}>
-                                <a className={"nav-link"} href={"/resume"}>resume</a>
+                                <a className={"nav-link disabled"} href={"/resume"}>resume</a>
                             </li>
                         </ul>
                     </div>
