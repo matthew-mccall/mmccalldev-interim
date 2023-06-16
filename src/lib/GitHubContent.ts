@@ -4,14 +4,6 @@ import {Octokit} from "octokit";
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
 });
-
-interface GitHubPushEvent {
-    repos: {
-        name: string
-        commitCount: number
-    }[]
-}
-
 const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
     const res = await octokit.rest.activity.listPublicEventsForUser({
         username: 'matthew-mccall',

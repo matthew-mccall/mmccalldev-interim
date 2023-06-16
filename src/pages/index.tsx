@@ -6,7 +6,7 @@ import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
 import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 import {Content} from "@mmccalldev/lib/Content";
-import {useEffect, useRef} from "react";
+import {useEffect} from "react";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
 import {Fade} from "react-awesome-reveal";
@@ -62,7 +62,7 @@ export default function Home({content}: IndexProps) {
                     <div className={"py-5"}>
                         <div className={"container"}>
                             <div className={"row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4"} data-masonry='{"percentPosition": true }'>
-                                <Fade cascade damping={0.2} triggerOnce>
+                                <Fade cascade damping={0.1} triggerOnce>
                                     {
                                         content.map((content, index) => {
                                             return (
