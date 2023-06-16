@@ -4,7 +4,7 @@ import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 
 export default function ContentCard({image, title, description, link, date}: Content) {
     return (
-        <div className={`card border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.acrylic}`}>
+        <div className={`card border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.saturated}`}>
             {image && <img src={image} className={"card-img-top"} alt={title}/>}
             <div className={"card-body"}>
                 {link
