@@ -11,18 +11,18 @@ const UnsplashContent: ContentProvider = async (): Promise<Content[]> => {
         username: '__mmccall',
     })).response?.results;
 
-    let content: Content[] = [];
-
-    for (const photo of photos!) {
-        content.push({
-            image: photo.urls.regular,
-            title: photo.alt_description ?? "Uploaded a photo",
-            link: photo.links.html,
-            date: photo.created_at,
-        });
+    if (!photos) {
+        return [];
     }
 
-    return content;
+    return photos.map(({urls, alt_description, links, created_at}) => {
+        return {
+            image: urls.regular,
+            title: alt_description ?? "Uploaded a photo",
+            link: links.html,
+            date: created_at,
+        }
+    })
 }
 
 export default UnsplashContent;

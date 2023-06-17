@@ -1,7 +1,6 @@
 import ContentCard from "@mmccalldev/components/ContentCard";
 import {GetStaticProps} from "next";
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
-import GetTwitterContent from "@mmccalldev/lib/TwitterContent";
 import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
 import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 import {Content} from "@mmccalldev/lib/Content";
@@ -16,12 +15,13 @@ interface IndexProps {
 }
 
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
-    const youtubeContent = await GetYouTubeContent();
-    const twitterContent = await GetTwitterContent();
-    const githubContent = await GetGitHubContent();
-    const unsplashContent = await GetUnsplashContent();
+    const [youtubeContent, githubContent, unsplashContent] = await Promise.all([
+        GetYouTubeContent(),
+        GetGitHubContent(),
+        GetUnsplashContent()
+    ])
 
-    const content = [...youtubeContent, ...twitterContent, ...githubContent, ...unsplashContent].sort((a, b) => {
+    const content = [...youtubeContent, ...githubContent, ...unsplashContent].sort((a, b) => {
         return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
     })
 

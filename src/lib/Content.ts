@@ -1,9 +1,9 @@
 export interface Content {
-    image?: string | null;
     title: string;
-    description?: string | null;
-    link?: string;
     date: string;
+    link?: string;
+    image?: string | null;
+    description?: string | null;
 }
 
 export type ContentProvider = () => Promise<Content[]>;

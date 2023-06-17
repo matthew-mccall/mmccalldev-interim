@@ -1,4 +1,4 @@
-import {ContentProvider, Content} from "@mmccalldev/lib/Content";
+import {Content, ContentProvider} from "@mmccalldev/lib/Content";
 import {Octokit} from "octokit";
 
 const octokit = new Octokit({
@@ -17,43 +17,49 @@ const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
 
     let pushEvents = res.data.filter((event) => event.type === 'PushEvent');
 
-    let initialPushEventsMap = new Map<string, Map<string, number>>;
-    let pushEventsGroupedByDay = pushEvents.reduce((acc, event) => {
-        const date = new Date(event.created_at!);
-        const key = date.toLocaleDateString()
-        const repoGroup = acc.get(key);
+    let pushDates = pushEvents
+        .reduce((acc, event) => {
+            if (event.created_at) {
+                acc.add(new Date(event.created_at).toLocaleDateString());
+            }
 
-        if (!repoGroup) {
-            // @ts-ignore
-            acc.set(key, new Map([[event.repo.name, event.payload.commits.length]]));
             return acc;
-        }
+        }, new Set<string>)
 
-        const commitCount = repoGroup.get(event.repo.name);
+    let pushedRepos = pushEvents
+        .reduce((acc, event) => {
+            if (event.repo.name) {
+                acc.add(event.repo.name);
+            }
 
-        if (!commitCount) {
-            // @ts-ignore
-            repoGroup.set(event.repo.name, event.payload.commits.length);
             return acc;
-        }
+        }, new Set<string>)
 
-        // @ts-ignore
-        repoGroup.set(event.repo.name, commitCount + event.payload.commits.length);
+    pushDates.forEach((date) => {
+        pushedRepos.forEach((repo) => {
+            const commitCount = pushEvents
+                .filter(event =>
+                    event.repo.name === repo &&
+                    event.created_at &&
+                    new Date(event.created_at).toLocaleDateString() === date)
+                .reduce((acc, event) => {
+                    // @ts-ignore
+                    if (event.payload.commits) {
+                        // @ts-ignore
+                        acc += event.payload.commits.length;
+                    }
+                    return acc;
+                }, 0)
 
-        return acc;
-    }, initialPushEventsMap);
+            if (commitCount === 0) {
+                return;
+            }
 
-    pushEventsGroupedByDay.forEach((repoGroup, date) => {
-        repoGroup.forEach((commitCount, repoName) => {
-
-            const userNameLocation = repoName.indexOf('matthew-mccall/');
-            const shortenedRepoName = userNameLocation === 0 ? repoName.slice(15) : repoName;
-
-            // replace hyphens with non-breaking hyphens
+            const shortenedRepoName = repo.indexOf('matthew-mccall/') === 0 ? repo.slice(15) : repo;
             const formattedRepoName = shortenedRepoName.replace(/-/g, '\u2011');
 
             content.push({
-                title: `${commitCount} commits to ${formattedRepoName}`,
+                title: `Pushed ${commitCount} commit${commitCount === 1 ? '' : 's'} to ${formattedRepoName}`,
                 date: date,
             });
         });
