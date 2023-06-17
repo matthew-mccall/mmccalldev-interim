@@ -5,6 +5,7 @@ import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 export default function NavigationBar() {
 
     const [show, setShow] = useState(false);
+    const [offcanvasAcrylic, setOffcanvasAcrylic] = useState<string | null>(null)
 
     useEffect(() => {
         if (typeof document === 'undefined') return;
@@ -15,24 +16,32 @@ export default function NavigationBar() {
         hammer.on('swipeleft', () => {
             if (window.innerWidth >= 992) return;
             setShow(true)
+            setOffcanvasAcrylic(AcrylicStyle.acrylic)
         })
 
         hammer.on('swiperight', () => {
             if (window.innerWidth >= 992) return;
             setShow(false)
+            setOffcanvasAcrylic(null)
         })
     })
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
 
     return (
         <Navbar bg={'body'} expand={'lg'} fixed={'top'} className={`bg-opacity-75 ${AcrylicStyle.acrylic}`}>
             <Container>
                 <Navbar.Brand href={"/"}>mmccall.dev</Navbar.Brand>
-                <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
                 <Navbar.Offcanvas
                     id={"offcanvasNavbar"}
+                    className={offcanvasAcrylic}
                     aria-labelledby={"offcanvasNavbarLabel"}
                     placement={'end'}
-                    show={show}>
+                    show={show}
+                    onHide={handleClose}
+                >
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel">mmccall.dev</Offcanvas.Title>
                     </Offcanvas.Header>
