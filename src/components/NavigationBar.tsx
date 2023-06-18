@@ -15,25 +15,31 @@ export default function NavigationBar() {
         let hammer = new Hammer(document.body);
         hammer.on('swipeleft', () => {
             if (window.innerWidth >= 992) return;
-            setShow(true)
-            setOffcanvasAcrylic(AcrylicStyle.acrylic)
+            handleShow()
         })
 
         hammer.on('swiperight', () => {
             if (window.innerWidth >= 992) return;
-            setShow(false)
-            setOffcanvasAcrylic(null)
+            handleClose()
         })
     })
 
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true)
+        setOffcanvasAcrylic(AcrylicStyle.acrylic)
+    };
+    const handleClose = () => {
+        setShow(false)
+        setOffcanvasAcrylic(null)
+    };
 
     return (
         <Navbar bg={'body'} expand={'lg'} fixed={'top'} className={`bg-opacity-75 ${AcrylicStyle.acrylic}`}>
             <Container>
                 <Navbar.Brand href={"/"}>mmccall.dev</Navbar.Brand>
-                <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
+                <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} >
+                    <i className={"bi-list fs-2"} />
+                </Navbar.Toggle>
                 <Navbar.Offcanvas
                     id={"offcanvasNavbar"}
                     className={offcanvasAcrylic}
