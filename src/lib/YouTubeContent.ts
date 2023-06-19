@@ -37,7 +37,7 @@ const GetYouTubeContent: ContentProvider = async (): Promise<Content[]> => {
                 snippet.thumbnails?.maxres?.url ||
                 snippet.thumbnails?.high?.url ||
                 snippet.thumbnails?.medium?.url ||
-                snippet.thumbnails?.default?.url || null;
+                snippet.thumbnails?.default?.url;
 
             return {
                 image: thumbnail,

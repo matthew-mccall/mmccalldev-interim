@@ -1,19 +1,19 @@
 import {Content} from "@mmccalldev/lib/Content";
 import React from "react";
 import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
+import {Card} from "react-bootstrap";
 
 export default function ContentCard({image, title, description, link, date}: Content) {
     return (
-        <div className={`card border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.saturated}`}>
-            {image && <img src={image} className={"card-img-top"} alt={title}/>}
-            <div className={"card-body"}>
+        <Card className={`border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.saturated}`}>
+            {image && <Card.Img src={image} alt={title}/>}
+            <Card.Body>
                 {link
-                    ? <a href={link} className={"stretched-link text-decoration-none"}><h5
-                        className={"card-title"}>{title}</h5></a>
-                    : <h5 className={"card-title"}>{title}</h5>}
-                {description && <p className={"card-text text-truncate"}>{description}</p>}
-                <p className={"card-text"}><small className={"text-muted"}>{(new Date(date)).toDateString()}</small></p>
-            </div>
-        </div>
+                    ? <a href={link} className={"stretched-link text-decoration-none"}><Card.Title>{title}</Card.Title></a>
+                    : <Card.Title className={"card-title"}>{title}</Card.Title>}
+                {description && <Card.Text className={"text-truncate"}>{description}</Card.Text>}
+                <Card.Text><small className={"text-muted"}>{(new Date(date)).toDateString()}</small></Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
