@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 const inter = localFont({
-    src: "fonts/inter.var.woff2",
+    src: "fonts/Inter.var.woff2",
 })
 
 
