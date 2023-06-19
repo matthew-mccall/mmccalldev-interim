@@ -1,11 +1,12 @@
 import {Content, ContentProvider} from "@mmccalldev/lib/Content";
 import {createApi} from "unsplash-js";
+import { getAverageColor } from 'fast-average-color-node';
 
 const unsplash = createApi({
     accessKey: process.env.UNSPLASH_ACCESS_KEY!,
 });
 
-const UnsplashContent: ContentProvider = async (): Promise<Content[]> => {
+const UnsplashContent: ContentProvider = async ()=> {
 
     const photos = (await unsplash.users.getPhotos({
         username: '__mmccall',
@@ -15,10 +16,11 @@ const UnsplashContent: ContentProvider = async (): Promise<Content[]> => {
         return [];
     }
 
-    return photos.map(({urls, alt_description, links, created_at}) => {
+    return photos.map(async ({urls, alt_description, links, created_at}) => {
         return {
             image: urls.regular,
             overlay: true,
+            color: (await getAverageColor(urls.regular)).hex,
             title: alt_description ?? "Shared a photo",
             link: links.html,
             date: created_at,

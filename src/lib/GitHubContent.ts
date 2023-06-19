@@ -15,7 +15,7 @@ type PublicEventsForUserType = GetResponseDataTypeFromEndpointMethod<
     typeof octokit.activity.listPublicEventsForUser
 >;
 
-const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
+const GetGitHubContent: ContentProvider = async () => {
     const res = await octokit.activity.listPublicEventsForUser({
         username: 'matthew-mccall',
     });
@@ -24,7 +24,7 @@ const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
         return [];
     }
 
-    let content: Content[] = [];
+    let content: Promise<Content>[] = [];
 
     let pushEvents: PublicEventsForUserType = res.data.filter((event) => event.type === 'PushEvent');
 
@@ -69,10 +69,10 @@ const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
             const shortenedRepoName = repo.indexOf('matthew-mccall/') === 0 ? repo.slice(15) : repo;
             const formattedRepoName = shortenedRepoName.replace(/-/g, '\u2011');
 
-            content.push({
-                title: `Pushed ${commitCount} commit${commitCount === 1 ? '' : 's'} to ${formattedRepoName}`,
+            content.push(Promise.resolve({
+                title: `Pushed ${commitCount} commit${commitCount > 1 ? 's' : ''} to ${formattedRepoName}`,
                 date: date,
-            });
+            }));
         });
     });
 

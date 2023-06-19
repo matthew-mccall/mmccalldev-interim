@@ -8,7 +8,7 @@ import VerticalCenter from "@mmccalldev/components/VerticalCenter";
 async function getContent() {
     const [youtubeContent, githubContent, unsplashContent] = await Promise.all([GetYouTubeContent(), GetGitHubContent(), GetUnsplashContent()])
 
-    return [...youtubeContent, ...githubContent, ...unsplashContent]
+    return (await Promise.all([...youtubeContent, ...githubContent, ...unsplashContent]))
         .sort((a, b) => {
             return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
         });

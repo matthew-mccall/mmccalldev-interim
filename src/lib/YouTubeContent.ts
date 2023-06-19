@@ -6,7 +6,7 @@ const youtube = google.youtube({
     auth: process.env.YOUTUBE_API_KEY
 });
 
-const GetYouTubeContent: ContentProvider = async (): Promise<Content[]> => {
+const GetYouTubeContent: ContentProvider = async ()=> {
 
     // Get recent videos from my channel
     const response = await youtube.search.list({
@@ -30,7 +30,7 @@ const GetYouTubeContent: ContentProvider = async (): Promise<Content[]> => {
 
             return accumulator;
         }, [])
-        .map(item => {
+        .map(async (item) => {
             const snippet = item.snippet!
 
             const thumbnail =

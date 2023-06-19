@@ -4,7 +4,8 @@ export interface Content {
     link?: string;
     image?: string | null;
     overlay?: boolean;
+    color?: string;
     description?: string | null;
 }
 
-export type ContentProvider = () => Promise<Content[]>;
+export type ContentProvider = () => Promise<Promise<Content>[]>;
