@@ -3,6 +3,7 @@
 import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 import {useEffect, useState} from "react";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
+import {usePathname} from "next/navigation";
 
 export default function NavigationBar() {
 
@@ -35,6 +36,15 @@ export default function NavigationBar() {
         setOffcanvasAcrylic(null)
     };
 
+    const pathname = usePathname();
+
+    const navLinks: Map<string, string> = new Map([
+        ['home', '/'],
+        ['blog', '/blog'],
+        ['gallery', '/gallery'],
+        ['resume', '/resume'],
+    ]);
+
     return (
         <Navbar bg={'body'} expand={'lg'} fixed={'top'} className={`bg-opacity-75 ${AcrylicStyle.acrylic}`}>
             <Container>
@@ -55,10 +65,11 @@ export default function NavigationBar() {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className={"justify-content-end flex-grow-1 pe-3"}>
-                            <Nav.Link href={"/"}>home</Nav.Link>
-                            <Nav.Link disabled href={"/blog"}>blog</Nav.Link>
-                            <Nav.Link disabled href={"/gallery"}>gallery</Nav.Link>
-                            <Nav.Link disabled href={"/resume"}>resume</Nav.Link>
+                            {
+                                [...navLinks.entries()].map(([key, value]) =>
+                                    <Nav.Link href={value} key={key} active={pathname === value}>{key}</Nav.Link>
+                                )
+                            }
                         </Nav>
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>
