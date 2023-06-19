@@ -1,11 +1,22 @@
 import {Content, ContentProvider} from "@mmccalldev/lib/Content";
-import {Octokit} from "octokit";
+import {Octokit} from "@octokit/rest";
+import {
+    GetResponseDataTypeFromEndpointMethod,
+} from "@octokit/types";
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
+    request: {
+        fetch: fetch
+    }
 });
+
+type PublicEventsForUserType = GetResponseDataTypeFromEndpointMethod<
+    typeof octokit.activity.listPublicEventsForUser
+>;
+
 const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
-    const res = await octokit.rest.activity.listPublicEventsForUser({
+    const res = await octokit.activity.listPublicEventsForUser({
         username: 'matthew-mccall',
     });
 
@@ -15,7 +26,7 @@ const GetGitHubContent: ContentProvider = async (): Promise<Content[]> => {
 
     let content: Content[] = [];
 
-    let pushEvents = res.data.filter((event) => event.type === 'PushEvent');
+    let pushEvents: PublicEventsForUserType = res.data.filter((event) => event.type === 'PushEvent');
 
     let pushDates = pushEvents
         .reduce((acc, event) => {

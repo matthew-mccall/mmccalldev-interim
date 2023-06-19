@@ -1,13 +1,9 @@
-import {useEffect, useRef} from "react";
-
 interface ColorScheme {
     scheme: 'Complementary' | 'Analogous' | 'Triadic' | 'Split Complementary' | 'Tetradic' | 'Monochromatic';
     hues?: number[];
 }
 
 export default function DynamicBackground({children}: {children: React.ReactNode}) {
-
-    const svgRef = useRef<SVGSVGElement>(null);
 
     // pick random color scheme
     const colorSchemes: ColorScheme[] = [
@@ -51,37 +47,9 @@ export default function DynamicBackground({children}: {children: React.ReactNode
         sampledHues.push(colorScheme.hues[Math.floor(Math.random() * colorScheme.hues.length)]);
     }
 
-    useEffect(() => {
-        if (!svgRef.current) return
-        let svg = svgRef.current;
-
-        const animate = () => {
-
-            const circles = svg.getElementsByTagName("circle");
-            const circleCount = circles.length;
-            const circleSpeed = 10;
-
-            for (let i = 0; i < circleCount; i++) {
-                const circle = circles[i];
-                const x = parseFloat(circle.getAttribute("cx") || "0");
-                const y = parseFloat(circle.getAttribute("cy") || "0");
-                const r = parseFloat(circle.getAttribute("r") || "0");
-
-                const angle = Math.random() * 2 * Math.PI;
-                const dx = Math.cos(angle) * circleSpeed;
-                const dy = Math.sin(angle) * circleSpeed;
-
-                circle.setAttribute("cx", `${x + dx * r}%`);
-                circle.setAttribute("cy", `${y + dy * r}%`);
-            }
-
-            requestAnimationFrame(animate);
-        }
-    })
-
     return (
         <>
-            <svg ref={svgRef} width={"100%"} height={"100%"} style={{
+            <svg width={"100%"} height={"100%"} style={{
                 position: "fixed",
                 top: "0",
                 left: "0",

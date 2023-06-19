@@ -14,22 +14,6 @@ interface IndexProps {
     content: Content[]
 }
 
-export const getStaticProps: GetStaticProps<IndexProps> = async () => {
-    const [youtubeContent, githubContent, unsplashContent] = await Promise.all([
-        GetYouTubeContent(),
-        GetGitHubContent(),
-        GetUnsplashContent()
-    ])
-
-    const content = [...youtubeContent, ...githubContent, ...unsplashContent].sort((a, b) => {
-        return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
-    })
-
-    return {
-        props: { content }
-    }
-}
-
 export default function Home({content}: IndexProps) {
 
     useEffect(() => {

@@ -1,3 +1,5 @@
+'use client'
+
 import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 import {useEffect, useState} from "react";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
