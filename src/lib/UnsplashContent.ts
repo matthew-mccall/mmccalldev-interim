@@ -18,7 +18,8 @@ const UnsplashContent: ContentProvider = async (): Promise<Content[]> => {
     return photos.map(({urls, alt_description, links, created_at}) => {
         return {
             image: urls.regular,
-            title: alt_description ?? "Uploaded a photo",
+            overlay: true,
+            title: alt_description ?? "Shared a photo",
             link: links.html,
             date: created_at,
         }

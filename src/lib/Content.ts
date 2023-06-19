@@ -3,6 +3,7 @@ export interface Content {
     date: string;
     link?: string;
     image?: string | null;
+    overlay?: boolean;
     description?: string | null;
 }
 
