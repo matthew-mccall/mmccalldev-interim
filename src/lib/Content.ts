@@ -4,7 +4,7 @@ export interface Content {
     link?: string;
     image?: string | null;
     overlay?: boolean;
-    color?: string;
+    color?: string | null;
     description?: string | null;
 }
 
