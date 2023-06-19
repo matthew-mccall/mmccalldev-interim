@@ -6,7 +6,7 @@ import {Card} from "react-bootstrap";
 export default function ContentCard({image, title, description, link, date}: Content) {
     return (
         <Card className={`border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.saturated}`}>
-            {image && <Card.Img src={image} alt={title}/>}
+            {image && <Card.Img src={image} alt={title} variant={"top"} />}
             <Card.Body>
                 {link
                     ? <a href={link} className={"stretched-link text-decoration-none"}><Card.Title>{title}</Card.Title></a>
