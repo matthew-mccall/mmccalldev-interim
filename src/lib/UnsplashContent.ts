@@ -1,4 +1,4 @@
-import {Content, ContentProvider} from "@mmccalldev/lib/Content";
+import {ContentProvider} from "@mmccalldev/lib/Content";
 import {createApi} from "unsplash-js";
 import { getAverageColor } from 'fast-average-color-node';
 

@@ -1,4 +1,4 @@
-import {Content, ContentProvider} from "@mmccalldev/lib/Content";
+import {ContentProvider} from "@mmccalldev/lib/Content";
 import {google, youtube_v3} from "googleapis";
 
 const youtube = google.youtube({
