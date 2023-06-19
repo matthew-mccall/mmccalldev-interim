@@ -4,7 +4,7 @@ import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 import {Card} from "react-bootstrap";
 import Color from "colorjs.io"
 
-export default async function ContentCard({image, overlay, color, title, description, link, date}: Content) {
+export default function ContentCard({image, overlay, color, title, description, link, date}: Content) {
 
     const descriptionContent = description ? <Card.Text className={"text-truncate"}>{description}</Card.Text> : null;
     const cardContent = (<>
