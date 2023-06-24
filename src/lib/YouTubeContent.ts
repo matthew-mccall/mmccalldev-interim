@@ -8,13 +8,19 @@ const youtube = google.youtube({
 
 const GetYouTubeContent: ContentProvider = async ()=> {
 
-    // Get recent videos from my channel
-    const response = await youtube.search.list({
-        part: ["snippet", "id"],
-        channelId: process.env.YOUTUBE_CHANNEL_ID,
-        order: "date",
-        maxResults: 10,
-    });
+    let response;
+
+    try {
+        response = await youtube.search.list({
+            part: ["snippet", "id"],
+            channelId: process.env.YOUTUBE_CHANNEL_ID,
+            order: "date",
+            maxResults: 10,
+        });
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
 
     if (!response.data.items) {
         return [];
