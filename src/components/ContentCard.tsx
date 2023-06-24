@@ -45,7 +45,7 @@ export default function ContentCard({image, overlay, color, title, description, 
         </Card>)
     }
 
-    return (<Card className={`border-0 shadow bg-body bg-opacity-75 ${AcrylicStyle.saturated}`}>
+    return (<Card className={`shadow`}>
         {image && <Card.Img src={image} alt={title} variant={"top"} />}
         <Card.Body>
             {cardContent}

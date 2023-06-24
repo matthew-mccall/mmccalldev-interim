@@ -4,8 +4,9 @@ import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 import {useEffect, useState} from "react";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import {usePathname} from "next/navigation";
+import Link from "next/link";
 
-export default function NavigationBar() {
+export default function NavigationBar({position}: {position: 'fixed' | 'sticky'}) {
 
     const [show, setShow] = useState(false);
     const [offcanvasAcrylic, setOffcanvasAcrylic] = useState<string | null>(null)
@@ -46,7 +47,7 @@ export default function NavigationBar() {
     ]);
 
     return (
-        <Navbar bg={'body'} expand={'lg'} fixed={'top'} className={`bg-opacity-75 ${AcrylicStyle.acrylic}`}>
+        <Navbar bg={'body'} expand={'lg'} fixed={position === 'fixed' ? 'top' : undefined} sticky={position === 'sticky' ? 'top' : undefined} className={`shadow bg-opacity-75 ${AcrylicStyle.acrylic}`}>
             <Container>
                 <Navbar.Brand href={"/"}>mmccall.dev</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} >
@@ -54,7 +55,7 @@ export default function NavigationBar() {
                 </Navbar.Toggle>
                 <Navbar.Offcanvas
                     id={"offcanvasNavbar"}
-                    className={offcanvasAcrylic}
+                    className={`bg-body bg-opacity-75 ${offcanvasAcrylic}`}
                     aria-labelledby={"offcanvasNavbarLabel"}
                     placement={'end'}
                     show={show}
@@ -67,7 +68,9 @@ export default function NavigationBar() {
                         <Nav className={"justify-content-end flex-grow-1 pe-3"}>
                             {
                                 [...navLinks.entries()].map(([key, value]) =>
-                                    <Nav.Link href={value} key={key} active={pathname === value}>{key}</Nav.Link>
+                                    <Link href={value} key={key} className={`nav-link ${pathname === value ? 'active' : ''}`}>
+                                        {key}
+                                    </Link>
                                 )
                             }
                         </Nav>

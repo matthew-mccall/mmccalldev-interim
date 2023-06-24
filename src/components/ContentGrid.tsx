@@ -2,9 +2,9 @@
 
 import ContentCard from "@mmccalldev/components/ContentCard";
 import {Content} from "@mmccalldev/lib/Content";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {Fade} from "react-awesome-reveal";
-import {Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 
 interface ContentGridProps {
     content: Content[]
@@ -12,28 +12,36 @@ interface ContentGridProps {
 
 export default function ContentGrid({content}: ContentGridProps) {
 
+    const rowRef = useRef<HTMLDivElement | null>(null)
+
     useEffect(() => {
-        if (typeof document !== 'undefined') {
-            require('jquery/dist/jquery.min.js')
-            require('masonry-layout/dist/masonry.pkgd.min.js')
+        if (typeof document !== 'undefined' && rowRef.current) {
+            Promise.all([
+                import('jquery'),
+                import('masonry-layout')
+            ]).then(([jquery, masonry]) => {
+                new masonry.default(rowRef.current!, {
+                    itemSelector: '.col',
+                    percentPosition: true
+                })
+            })
         }
     })
 
     return (
         <Container>
-            <Row xs={1} md={2} lg={3} xl={4}
-                 data-masonry='{"percentPosition": true }'>
-                <Fade cascade damping={0.1} triggerOnce>
-                    {
-                        content.map((content, index) => {
-                            return (
-                                <div className={"col mb-3"} key={index}>
+            <Row xs={1} md={2} lg={3} xl={4} ref={rowRef} className={"g-4"}>
+                {
+                    content.map((content, index) => {
+                        return (
+                            <Col key={index}>
+                                <Fade delay={500} triggerOnce>
                                     <ContentCard {...content}/>
-                                </div>
-                            )
-                        })
-                    }
-                </Fade>
+                                </Fade>
+                            </Col>
+                        )
+                    })
+                }
             </Row>
         </Container>
     )

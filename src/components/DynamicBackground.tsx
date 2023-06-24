@@ -51,10 +51,8 @@ export default function DynamicBackground({children}: {children: React.ReactNode
         <>
             <svg width={"100%"} height={"100%"} style={{
                 position: "fixed",
-                top: "0",
-                left: "0",
                 zIndex: "-1",
-                filter: "blur(72px)"
+                filter: "blur(72px)",
             }}>
                 {
                     sampledHues.map((hue, i) => {

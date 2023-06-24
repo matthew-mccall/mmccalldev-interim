@@ -19,13 +19,12 @@ const inter = localFont({
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
     return (
-        <html lang={"en"} data-bs-theme={"dark"}>
+        <html lang={"en"}>
         <body style={{
             ...inter.style,
             fontFeatureSettings: "'ss01', 'cv11'",
-            backgroundColor: "black",
+            backgroundColor: "black"
         }}>
-        <NavigationBar/>
         <DynamicBackground>
             {children}
         </DynamicBackground>

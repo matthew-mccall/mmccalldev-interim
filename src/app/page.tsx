@@ -4,6 +4,8 @@ import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 
 import ContentGrid from "../components/ContentGrid";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
+import DynamicBackground from "@mmccalldev/components/DynamicBackground";
+import NavigationBar from "@mmccalldev/components/NavigationBar";
 
 async function getContent() {
     const [youtubeContent, githubContent, unsplashContent] = await Promise.all([GetYouTubeContent(), GetGitHubContent(), GetUnsplashContent()])
@@ -18,6 +20,7 @@ export default async function Page() {
     const content = await getContent();
     return (
         <>
+            <NavigationBar position={"fixed"}/>
             <div className={"vh-100"}>
                 <VerticalCenter>
                     <div className={"container text-light"}>
@@ -34,7 +37,7 @@ export default async function Page() {
                     </div>
                 </VerticalCenter>
             </div>
-            <div className={"py-5"}>
+            <div className={"py-5 bg-body"}>
                 <ContentGrid content={content}/>
             </div>
         </>
