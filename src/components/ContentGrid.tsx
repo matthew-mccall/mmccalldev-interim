@@ -19,7 +19,7 @@ export default function ContentGrid({content}: ContentGridProps) {
             Promise.all([
                 import('jquery'),
                 import('masonry-layout')
-            ]).then(([jquery, masonry]) => {
+            ]).then(([, masonry]) => {
                 new masonry.default(rowRef.current!, {
                     itemSelector: '.col',
                     percentPosition: true

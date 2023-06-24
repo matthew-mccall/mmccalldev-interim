@@ -1,6 +1,5 @@
 import {Content} from "@mmccalldev/lib/Content";
 import React from "react";
-import AcrylicStyle from "@mmccalldev/styles/Acrylic.module.css";
 import {Card} from "react-bootstrap";
 import Color from "colorjs.io"
 

@@ -4,7 +4,6 @@ import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 
 import ContentGrid from "../components/ContentGrid";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
-import DynamicBackground from "@mmccalldev/components/DynamicBackground";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
 
 async function getContent() {

@@ -1,7 +1,6 @@
 import localFont from "next/font/local";
 
 import {Metadata} from "next";
-import NavigationBar from "@mmccalldev/components/NavigationBar";
 import DynamicBackground from "@mmccalldev/components/DynamicBackground";
 
 import '@mmccalldev/styles/globals.scss'
