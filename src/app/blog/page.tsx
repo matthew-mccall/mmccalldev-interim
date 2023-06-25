@@ -27,6 +27,7 @@ export default async function Page() {
                 title: post.title,
                 date: "",
                 link: `/blog/${post.slug}`,
+                icon: "chat-left",
             }
         })
 

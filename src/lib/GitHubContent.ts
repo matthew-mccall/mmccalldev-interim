@@ -72,7 +72,7 @@ const GetGitHubContent: ContentProvider = async () => {
             content.push(Promise.resolve({
                 title: `Pushed ${commitCount} commit${commitCount > 1 ? 's' : ''} to ${formattedRepoName}`,
                 date: date,
-                source: 'github',
+                icon: 'github',
             }));
         });
     });

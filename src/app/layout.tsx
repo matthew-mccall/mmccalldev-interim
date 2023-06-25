@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 
 import {Metadata} from "next";
 import DynamicBackground from "@mmccalldev/components/DynamicBackground";
+import Disclaimer from "@mmccalldev/components/Disclaimer";
 
 import '@mmccalldev/styles/globals.scss'
 
@@ -24,6 +25,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             fontFeatureSettings: "'ss01', 'cv11'",
             backgroundColor: "black"
         }}>
+        <Disclaimer />
         <DynamicBackground>
             {children}
         </DynamicBackground>
