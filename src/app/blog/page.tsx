@@ -33,17 +33,14 @@ export default async function Page() {
 
     return (
         <>
-            <div className={"min-vh-100 d-flex flex-column"}>
-                <NavigationBar position={"sticky"} />
-                <div className={"py-5"}>
-                    <div className={"container text-light"}>
-                        <h1 className={"display-3 fw-semibold"}>Matthew's Blog</h1>
-                        <p className={"lead"}>A collection of my thoughts, ideas, and announcements.</p>
-                    </div>
+            <div className={"py-5"}>
+                <div className={"container text-light"}>
+                    <h1 className={"display-3 fw-semibold"}>Matthew's Blog</h1>
+                    <p className={"lead"}>A collection of my thoughts, ideas, and announcements.</p>
                 </div>
-                <div className={"bg-body py-5 flex-grow-1"}>
-                    <ContentGrid content={blogCards} />
-                </div>
+            </div>
+            <div className={"bg-body py-5 flex-grow-1"}>
+                <ContentGrid content={blogCards} />
             </div>
         </>
     )

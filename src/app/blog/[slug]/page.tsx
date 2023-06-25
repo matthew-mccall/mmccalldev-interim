@@ -13,7 +13,7 @@ export default async function Page({params}: { params: { slug: string } }) {
         notFound()
     }
 
-    const {content} = await compileMDX<Frontmatter>({
+    const {content, frontmatter} = await compileMDX<Frontmatter>({
         source: mdxData,
         options: {
             parseFrontmatter: true,
@@ -21,11 +21,18 @@ export default async function Page({params}: { params: { slug: string } }) {
     })
 
     return (
-        <div className={"container text-light"}>
-            <div className={"py-5 mt-5"}>
-                {content}
+        <>
+            <div className={"py-5"}>
+                <div className={"container text-light"}>
+                    <h1 className={"display-3 fw-semibold"}>{frontmatter.title}</h1>
+                </div>
             </div>
-        </div>
+            <div className={"py-5 bg-body flex-grow-1"}>
+                <div className={"container"}>
+                    {content}
+                </div>
+            </div>
+        </>
     )
 
 }

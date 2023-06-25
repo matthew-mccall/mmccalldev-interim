@@ -5,6 +5,7 @@ import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
 import ContentGrid from "../components/ContentGrid";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
+import Footer from "@mmccalldev/components/Footer";
 
 async function getContent() {
     const [youtubeContent, githubContent, unsplashContent] = await Promise.all([GetYouTubeContent(), GetGitHubContent(), GetUnsplashContent()])
@@ -39,6 +40,7 @@ export default async function Page() {
             <div className={"py-5 bg-body"}>
                 <ContentGrid content={content}/>
             </div>
+            <Footer/>
         </>
     );
 }
