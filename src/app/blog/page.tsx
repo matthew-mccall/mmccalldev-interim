@@ -1,5 +1,3 @@
-import {readdirSync, readFileSync} from "fs";
-import {compileMDX} from "next-mdx-remote/rsc";
 import {Content} from "@mmccalldev/lib/Content";
 import ContentGrid from "@mmccalldev/components/ContentGrid";
 import GetBlogContent from "@mmccalldev/lib/BlogContent";

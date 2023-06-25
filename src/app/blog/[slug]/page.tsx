@@ -29,6 +29,7 @@ export default async function Page({params}: { params: { slug: string } }) {
             </div>
             <div className={"py-5 bg-body flex-grow-1"}>
                 <div className={"container"}>
+                    <p className={"fw-semibold text-secondary"}>{new Date(frontmatter.date).toDateString()}</p>
                     {content}
                 </div>
             </div>

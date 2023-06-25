@@ -8,9 +8,10 @@ import {Col, Container, Row} from "react-bootstrap";
 
 interface ContentGridProps {
     content: Content[]
+    maxColumns?: number
 }
 
-export default function ContentGrid({content}: ContentGridProps) {
+export default function ContentGrid({content, maxColumns = 4}: ContentGridProps) {
 
     const rowRef = useRef<HTMLDivElement | null>(null)
 
@@ -30,7 +31,7 @@ export default function ContentGrid({content}: ContentGridProps) {
 
     return (
         <Container>
-            <Row xs={1} md={2} lg={3} xl={4} ref={rowRef} className={"g-4"}>
+            <Row xs={Math.max(maxColumns - 3, 1)} md={maxColumns - 2} lg={maxColumns - 1} xl={maxColumns} ref={rowRef} className={"g-4"}>
                 {
                     content.map((content, index) => {
                         return (
