@@ -4,7 +4,7 @@ import {Card} from "react-bootstrap";
 import Color from "colorjs.io"
 import Link from "next/link";
 
-export default function ContentCard({image, overlay, color, title, description, link, date}: Content) {
+export default function ContentCard({image, overlay, source, color, title, description, link, date}: Content) {
 
     const descriptionContent = description ? <Card.Text className={"text-truncate"}>{description}</Card.Text> : null;
 
@@ -23,7 +23,10 @@ export default function ContentCard({image, overlay, color, title, description, 
         {link ? linkElement : <Card.Title>{title}</Card.Title> }
         {descriptionContent}
         <Card.Text>
-            <small className={"text-muted"}>{(new Date(date)).toDateString()}</small>
+            <div className={"d-flex flex-row justify-content-between text-muted"}>
+            <small>{(new Date(date)).toDateString()}</small>
+            <i className={`bi-${source}`}></i>
+            </div>
         </Card.Text>
     </>)
 

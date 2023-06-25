@@ -1,6 +1,7 @@
 export interface Content {
     title: string;
     date: string;
+    source: string;
     link?: string;
     image?: string | null;
     overlay?: boolean;

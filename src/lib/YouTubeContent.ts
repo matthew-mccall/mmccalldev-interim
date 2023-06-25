@@ -50,7 +50,8 @@ const GetYouTubeContent: ContentProvider = async ()=> {
                 title: snippet.title!,
                 description: snippet.description,
                 link: `https://www.youtube.com/watch?v=${item.id!.videoId}`,
-                date: snippet.publishedAt!
+                date: snippet.publishedAt!,
+                source: 'youtube',
             }
         });
 }

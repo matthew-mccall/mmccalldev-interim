@@ -1,7 +1,3 @@
-import {readdirSync, readFileSync} from "fs";
-import {compileMDX} from "next-mdx-remote/rsc";
-import {Content} from "@mmccalldev/lib/Content";
-import ContentGrid from "@mmccalldev/components/ContentGrid";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
 import React from "react";
 import Footer from "@mmccalldev/components/Footer";

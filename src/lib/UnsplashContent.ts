@@ -20,6 +20,7 @@ const GetUnsplashContent: ContentProvider = async ()=> {
         return {
             image: urls.regular,
             overlay: height > width,
+            source: 'image',
             color: color ?? (await getAverageColor(urls.regular)).hex,
             title: alt_description ?? "Shared a photo",
             link: links.html,

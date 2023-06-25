@@ -21,8 +21,9 @@ const GetTwitchContent: ContentProvider = async ()=> {
 
         return {
             title,
-            link: url,
             date: creationDate.toString(),
+            source: 'twitch',
+            link: url,
             image: thumbnailUrl,
             // overlay: true,
         }
