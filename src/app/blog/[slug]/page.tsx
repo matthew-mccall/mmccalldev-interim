@@ -8,7 +8,7 @@ export default async function Page({params}: { params: { slug: string } }) {
     let mdxData: string;
 
     try {
-        mdxData = readFileSync(`src/blog/${slug}.mdx`, 'utf8');
+        mdxData = readFileSync(`${process.cwd()}/src/blog/${slug}.mdx`, 'utf8');
     } catch (e) {
         notFound()
     }

@@ -5,10 +5,10 @@ import {compileMDX} from "next-mdx-remote/rsc";
 const GetBlogContent: ContentProvider = async () => {
     // get all .mdx files in the src/blog directory
 
-    return readdirSync('src/blog')
+    return readdirSync(`${process.cwd()}/src/blog`)
         .filter(file => file.endsWith('.mdx'))
         .map(async (file) => {
-            const data = readFileSync(`src/blog/${file}`, 'utf8');
+            const data = readFileSync(`${process.cwd()}/src/blog/${file}`, 'utf8');
             const {frontmatter} = await compileMDX<Frontmatter>({
                 source: data,
                 options: {
