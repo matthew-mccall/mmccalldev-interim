@@ -6,7 +6,7 @@ const unsplash = createApi({
     accessKey: process.env.UNSPLASH_ACCESS_KEY!,
 });
 
-const UnsplashContent: ContentProvider = async ()=> {
+const GetUnsplashContent: ContentProvider = async ()=> {
 
     const photos = (await unsplash.users.getPhotos({
         username: '__mmccall',
@@ -28,4 +28,4 @@ const UnsplashContent: ContentProvider = async ()=> {
     })
 }
 
-export default UnsplashContent;
+export default GetUnsplashContent;

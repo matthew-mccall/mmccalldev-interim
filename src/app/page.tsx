@@ -1,6 +1,7 @@
 import GetYouTubeContent from "@mmccalldev/lib/YouTubeContent";
 import GetGitHubContent from "@mmccalldev/lib/GitHubContent";
 import GetUnsplashContent from "@mmccalldev/lib/UnsplashContent";
+import GetTwitchContent from "@mmccalldev/lib/TwitchContent";
 
 import ContentGrid from "../components/ContentGrid";
 import VerticalCenter from "@mmccalldev/components/VerticalCenter";
@@ -8,9 +9,13 @@ import NavigationBar from "@mmccalldev/components/NavigationBar";
 import Footer from "@mmccalldev/components/Footer";
 
 async function getContent() {
-    const [youtubeContent, githubContent, unsplashContent] = await Promise.all([GetYouTubeContent(), GetGitHubContent(), GetUnsplashContent()])
+    const [youtubeContent, githubContent, unsplashContent, twitchContent] = await Promise.all([
+        GetYouTubeContent(),
+        GetGitHubContent(),
+        GetUnsplashContent(),
+        GetTwitchContent()])
 
-    return (await Promise.all([...youtubeContent, ...githubContent, ...unsplashContent]))
+    return (await Promise.all([...youtubeContent, ...githubContent, ...unsplashContent, ...twitchContent]))
         .sort((a, b) => {
             return (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
         });

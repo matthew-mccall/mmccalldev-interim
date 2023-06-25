@@ -12,6 +12,8 @@
     "@emotion/react": "^11.10.6",
     "@octokit/rest": "^19.0.13",
     "@octokit/types": "^10.0.0",
+    "@twurple/api": "^6.2.1",
+    "@twurple/auth": "^6.2.1",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
