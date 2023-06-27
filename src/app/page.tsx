@@ -31,7 +31,7 @@ export default async function Page() {
         <>
             <NavigationBar position={"fixed"}/>
             <DynamicBackground>
-            <div className={"vh-100"}>
+            <div className={"svh-100"}>
                 <VerticalCenter>
                     <div className={"container text-light"}>
                         <h1 className={"display-1 fw-medium"}>Matthew McCall</h1>
