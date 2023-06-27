@@ -8,6 +8,7 @@ import VerticalCenter from "@mmccalldev/components/VerticalCenter";
 import NavigationBar from "@mmccalldev/components/NavigationBar";
 import Footer from "@mmccalldev/components/Footer";
 import GetBlogContent from "@mmccalldev/lib/BlogContent";
+import GitHubCalendarWrapper from "@mmccalldev/components/GitHubCalendar";
 
 async function getContent() {
     const [youtubeContent, githubContent, unsplashContent, twitchContent, blogContent] = await Promise.all([
@@ -45,6 +46,13 @@ export default async function Page() {
                 </VerticalCenter>
             </div>
             <div className={"py-5 bg-body"}>
+                <div className={"container"}>
+                    <div className={"mb-5 row"}>
+                        <div className={"col-auto mx-auto"}>
+                            <GitHubCalendarWrapper/>
+                        </div>
+                    </div>
+                </div>
                 <ContentGrid content={content}/>
             </div>
             <Footer/>
