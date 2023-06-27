@@ -1,6 +1,7 @@
 import {notFound} from 'next/navigation'
 import {readFileSync} from "fs";
 import {compileMDX} from "next-mdx-remote/rsc";
+import DynamicBackground from "@mmccalldev/components/DynamicBackground";
 
 export default async function Page({params}: { params: { slug: string } }) {
 
@@ -22,11 +23,13 @@ export default async function Page({params}: { params: { slug: string } }) {
 
     return (
         <>
-            <div className={"py-5"}>
-                <div className={"container text-light"}>
-                    <h1 className={"display-3 fw-semibold"}>{frontmatter.title}</h1>
+            <DynamicBackground>
+                <div className={"py-5"}>
+                    <div className={"container text-light"}>
+                        <h1 className={"display-3 fw-semibold"}>{frontmatter.title}</h1>
+                    </div>
                 </div>
-            </div>
+            </DynamicBackground>
             <div className={"py-5 bg-body flex-grow-1"}>
                 <div className={"container"}>
                     <p className={"fw-semibold text-secondary"}>{new Date(frontmatter.date).toDateString()}</p>

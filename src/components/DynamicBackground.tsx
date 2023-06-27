@@ -48,7 +48,11 @@ export default function DynamicBackground({children}: {children: React.ReactNode
     }
 
     return (
-        <>
+        <div style={{
+            backgroundColor: "black",
+            zIndex: "-2",
+            position: "relative"
+        }}>
             <svg width={"100%"} height={"100%"} style={{
                 position: "fixed",
                 zIndex: "-1",
@@ -62,6 +66,6 @@ export default function DynamicBackground({children}: {children: React.ReactNode
                 }
             </svg>
             {children}
-        </>
+        </div>
     )
 }

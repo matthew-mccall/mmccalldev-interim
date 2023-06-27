@@ -9,6 +9,7 @@ import NavigationBar from "@mmccalldev/components/NavigationBar";
 import Footer from "@mmccalldev/components/Footer";
 import GetBlogContent from "@mmccalldev/lib/BlogContent";
 import GitHubCalendarWrapper from "@mmccalldev/components/GitHubCalendar";
+import DynamicBackground from "@mmccalldev/components/DynamicBackground";
 
 async function getContent() {
     const [youtubeContent, githubContent, unsplashContent, twitchContent, blogContent] = await Promise.all([
@@ -29,6 +30,7 @@ export default async function Page() {
     return (
         <>
             <NavigationBar position={"fixed"}/>
+            <DynamicBackground>
             <div className={"vh-100"}>
                 <VerticalCenter>
                     <div className={"container text-light"}>
@@ -45,6 +47,7 @@ export default async function Page() {
                     </div>
                 </VerticalCenter>
             </div>
+            </DynamicBackground>
             <div className={"py-5 bg-body"}>
                 <div className={"container"}>
                     <div className={"mb-5 row"}>

@@ -23,12 +23,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <body style={{
             ...inter.style,
             fontFeatureSettings: "'ss01', 'cv11'",
-            backgroundColor: "black"
         }}>
         <Disclaimer />
-        <DynamicBackground>
-            {children}
-        </DynamicBackground>
+        {children}
         </body>
         </html>
     )
