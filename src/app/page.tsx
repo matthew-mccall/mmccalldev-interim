@@ -30,7 +30,7 @@ export default async function Page() {
     return (
         <>
             <NavigationBar position={"fixed"}/>
-            <DynamicBackground>
+            <DynamicBackground blobCount={10}>
             <div className={"svh-100"}>
                 <VerticalCenter>
                     <div className={"container text-light"}>
