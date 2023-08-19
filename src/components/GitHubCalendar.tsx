@@ -1,16 +1,10 @@
 'use client'
 
 import GitHubCalendar from "react-github-calendar";
-import {useEffect, useState} from "react";
+import {useContext} from "react";
+import {ThemeContext} from "@mmccalldev/components/ThemeProvider";
 
 export default function GitHubCalendarWrapper() {
-    const [theme, setTheme] = useState<"light" | "dark">("light")
-
-    useEffect(() => {
-        if (window && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            setTheme("dark")
-        }
-    })
-
+    let theme = useContext(ThemeContext)
     return (<GitHubCalendar username={"matthew-mccall"} colorScheme={theme} />)
 }
