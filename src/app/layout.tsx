@@ -1,15 +1,11 @@
+'use client'
+
 import localFont from "next/font/local";
 
-import {Metadata} from "next";
 import Disclaimer from "@mmccalldev/components/Disclaimer";
 
 import '@mmccalldev/styles/globals.scss'
-
-export const metadata: Metadata = {
-    title: "Matthew McCall",
-    description: "Matthew McCall's personal website, blog, and portfolio.",
-    viewport: "width=device-width, initial-scale=1",
-}
+import React, {useEffect, useState} from "react";
 
 const inter = localFont({
     src: "fonts/Inter.var.woff2",
@@ -17,12 +13,20 @@ const inter = localFont({
 
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
+    const [theme, setTheme] = useState<"light" | "dark">("light")
+
+    useEffect(() => {
+        if (window && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setTheme("dark")
+        }
+    })
+
     return (
         <html lang={"en"}>
         <body style={{
             ...inter.style,
             fontFeatureSettings: "'ss01', 'cv11'",
-        }}>
+        }} data-bs-theme={theme}>
         <Disclaimer />
         {children}
         </body>
