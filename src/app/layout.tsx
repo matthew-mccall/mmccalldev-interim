@@ -5,6 +5,13 @@ import localFont from "next/font/local";
 
 import Disclaimer from "@mmccalldev/components/Disclaimer";
 import ThemeProvider from "@mmccalldev/components/ThemeProvider";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Matthew McCall",
+    description: "Matthew McCall's personal website, blog, and portfolio.",
+    viewport: "width=device-width, initial-scale=1",
+}
 
 const inter = localFont({
     src: "fonts/Inter.var.woff2",
