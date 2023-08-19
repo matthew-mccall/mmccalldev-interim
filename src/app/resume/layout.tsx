@@ -6,7 +6,7 @@ export default function Page({ children }: { children: React.ReactNode }) {
 
     return (
             <div className={"min-svh-100 d-flex flex-column"}>
-                <NavigationBar position={"fixed"} />
+                <NavigationBar position={"sticky"} />
                 <div className={"flex-grow-1 d-flex flex-column"}>
                     {children}
                 </div>
