@@ -1,5 +1,5 @@
 import {Content} from "@mmccalldev/lib/Content";
-import React from "react";
+import React, {CSSProperties} from "react";
 import {Card} from "react-bootstrap";
 import Color from "colorjs.io"
 import Link from "next/link";
@@ -8,19 +8,23 @@ export default function ContentCard({image, overlay, icon, color, title, descrip
 
     const descriptionContent = description ? <Card.Text className={"text-truncate"}>{description}</Card.Text> : null;
 
+    const cardTitleStyle: CSSProperties = {
+        fontFeatureSettings: "'ss01', 'cv11', 'zero'",
+    }
+
     let linkElement = null;
 
     if (link) {
         // check if link is external
         if (link.startsWith("http")) {
-            linkElement = <a href={link} className={"stretched-link text-reset text-decoration-none"}><Card.Title>{title}</Card.Title></a>
+            linkElement = <a href={link} className={"stretched-link text-reset text-decoration-none"}><Card.Title style={cardTitleStyle}>{title}</Card.Title></a>
         } else {
-            linkElement = <Link href={link} className={"stretched-link text-reset text-decoration-none"}><Card.Title>{title}</Card.Title></Link>
+            linkElement = <Link href={link} className={"stretched-link text-reset text-decoration-none"}><Card.Title style={cardTitleStyle}>{title}</Card.Title></Link>
         }
     }
 
     const cardContent = (<>
-        {link ? linkElement : <Card.Title>{title}</Card.Title> }
+        {link ? linkElement : <Card.Title style={cardTitleStyle}>{title}</Card.Title> }
         {descriptionContent}
         <Card.Text>
             <div className={"d-flex flex-row justify-content-between text-muted"}>
